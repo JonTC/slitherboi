@@ -1,0 +1,4 @@
+discord
+discord[voice]
+youtube-dl
+asyncio
