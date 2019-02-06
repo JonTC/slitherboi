@@ -14,18 +14,18 @@ client.remove_command('help')
 players = {}
 queues = {}
 
-status = ['with Myself', 'with Your Heart', 'You Like a Fiddle']
-extensions = ['Music', 'Calculator', 'Fun']
+gamestatus = ['with Myself', 'with Your Heart', 'You Like a Fiddle', 'HuniePop', 'OSU!']
+extensions = ['Music', 'Calculator', 'Fun', 'TTT']
 
 
-#this just changes the little 'playing with' thing underneath the bot name every 100 whatevers
+#this just changes the little 'playing with' thing underneath the bot name every 50 seconds
 async def change_status():
     await client.wait_until_ready()
-    msgs = cycle(status)
+    msgs = cycle(gamestatus)
 
     while not client.is_closed:
-        current_status = next(msgs)
-        await client.change_presence(game=discord.Game(name=current_status))
+        current_gamestatus = next(msgs)
+        await client.change_presence(game=discord.Game(name=current_gamestatus))
         #asyncio just pauses this function while allowing all other code to run, time.sleep pauses entire bot
         await asyncio.sleep(50)
 
@@ -65,6 +65,8 @@ async def help(ctx):
     embed.add_field(name='.multiply[num] [num] [num] etc..', value = 'Multiplies multiple numbers', inline=False)
     embed.add_field(name='.add [num] [num] [num] etc..', value = 'Adds multiple numbers', inline=False)
     embed.add_field(name='.subtract [num] [num] [num] etc..', value = '(Only works with 2 numbers right now)Subtracts numbers', inline=False)
+
+    embed.add_field(name='.ttt', value = 'TicTacToe!', inline=False)
 
     embed.add_field(name='.load [extension]', value = 'Loads extension', inline=False)
     embed.add_field(name='.unload [extension]', value = 'Unloads extension', inline=False)

@@ -28,8 +28,9 @@ class Calculator:
             total = float(x) - total
         await self.client.say('The total is {}'.format(total/-1))
 
+    #dont work yet
     @commands.command()
-    async def mod(self, *args):
+    async def mod(self, value):
         for x in args:
             remainder = float(x)
         await self.client.say('The remainder of {} % {} is {}'.format(a, b, remainder))
