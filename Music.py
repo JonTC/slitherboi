@@ -16,14 +16,22 @@ class Music:
 
     @commands.command(pass_context=True)
     async def join(self, ctx):
+        author = ctx.message.author
         channel = ctx.message.author.voice.voice_channel
-        await self.client.join_voice_channel(channel)
+        try:
+            await self.client.join_voice_channel(channel)
+        except:
+            await self.client.say(str(author.mention) + ' fuck you, join a voice channel'.format(str(author)))
 
     @commands.command(pass_context=True)
     async def leave(self, ctx):
-        server = ctx.message.server
-        voice_client = self.client.voice_client_in(server)
-        await voice_client.disconnect()
+        author = ctx.message.author
+        channel = ctx.message.server
+        voice_client = self.client.voice_client_in(channel)
+        try:
+            await voice_client.disconnect()
+        except:
+            await self.client.say(str(author.mention)+' join a voice channel bitch')
 
     @commands.command(pass_context=True)
     async def play(self, ctx, url):
@@ -50,15 +58,14 @@ class Music:
 
     @commands.command(pass_context=True)
     async def queue(self, ctx, url):
+        author = ctx.message.author
         server = ctx.message.server
         voice_client = self.client.voice_client_in(server)
         player = await voice_client.create_ytdl_player(url, after=lambda: check_queue(server.id))
-
         if server.id in queues:
             queues[server.id].append(player)
-        else:
             queues[server.id] = [player]
-        await self.client.say('Added to queue')
+        await self.client.say(str(author.mention()) + 'Added to queue')
 
 def setup(client):
     client.add_cog(Music(client))

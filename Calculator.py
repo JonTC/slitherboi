@@ -21,19 +21,19 @@ class Calculator:
         await self.client.say('The sum is {}'.format(sum))
 
     #only works with 2 numbers rn
-    @commands.command()
-    async def subtract(self, *args):
-        total = 0
-        for x in args:
-            total = float(x) - total
-        await self.client.say('The total is {}'.format(total/-1))
+#    @commands.command()
+#    async def subtract(self, *args):
+#        total = 0
+#        for x in args:
+#            total = float(x) - total
+#        await self.client.say('The total is {}'.format(total/-1))
 
     #dont work yet
-    @commands.command()
-    async def mod(self, value):
-        for x in args:
-            remainder = float(x)
-        await self.client.say('The remainder of {} % {} is {}'.format(a, b, remainder))
+#    @commands.command()
+#    async def mod(self, value):
+#        for x in args:
+#            remainder = float(x)
+#        await self.client.say('The remainder of {} % {} is {}'.format(a, b, remainder))
 
     @commands.command()
     async def timer(self, seconds):

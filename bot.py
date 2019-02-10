@@ -1,6 +1,7 @@
 import discord
 import asyncio
 import youtube_dl
+import re
 
 from discord.ext import commands
 from itertools import cycle
@@ -13,9 +14,18 @@ client.remove_command('help')
 
 players = {}
 queues = {}
+weebsongs = [
+'https://www.youtube.com/watch?v=-Q--ZqWOZrw',
+'https://www.youtube.com/watch?v=0YF8vecQWYs',
+'https://www.youtube.com/watch?v=3dLqUADUNZ0',
+'https://www.youtube.com/watch?v=CaksNlNniis',
+'https://www.youtube.com/watch?v=5_iuNaULT5k',
+'https://www.youtube.com/watch?v=R7uF09yI4YA',
+'https://www.youtube.com/watch?v=-hA4na_3jT0',
+]
 
-gamestatus = ['with Myself', 'with Your Heart', 'You Like a Fiddle', 'HuniePop', 'OSU!']
-extensions = ['Music', 'Calculator', 'Fun', 'TTT']
+gamestatus = ['with Myself', 'with Your Heart', 'You Like a Fiddle', 'HuniePop', 'OSU!', 'the Game of Life', 'My Cat']
+extensions = ['Music', 'Calculator', 'Fun', 'TTT','Help']
 
 
 #this just changes the little 'playing with' thing underneath the bot name every 50 seconds
@@ -27,8 +37,7 @@ async def change_status():
         current_gamestatus = next(msgs)
         await client.change_presence(game=discord.Game(name=current_gamestatus))
         #asyncio just pauses this function while allowing all other code to run, time.sleep pauses entire bot
-        await asyncio.sleep(50)
-
+        await asyncio.sleep(3600)
 
 @client.event
 async def on_ready():
@@ -48,36 +57,6 @@ async def ping():
     #client.say can only be used in a command, while client.send_message can be used in commands and events
     #not passed in a channel, sends message to channel that it was called in
     await client.say('Pong!')
-
-#sends command help privately to the message sender
-@client.command(pass_context=True)
-async def help(ctx):
-    author = ctx.message.author
-    embed = discord.Embed(
-    color = discord.Color.orange()
-    )
-    embed.set_author(name='Help')
-    embed.add_field(name='.ping', value = 'Returns Pong!', inline=False)
-    embed.add_field(name='.echo [words]', value = 'Echoes the words that you input', inline=False)
-    embed.add_field(name='.clear [amount]', value = 'Clears the specified amount of messages', inline=False)
-    embed.add_field(name='.timer [seconds]', value = 'Gives a message once [seconds] have passed', inline=False)
-
-    embed.add_field(name='.multiply[num] [num] [num] etc..', value = 'Multiplies multiple numbers', inline=False)
-    embed.add_field(name='.add [num] [num] [num] etc..', value = 'Adds multiple numbers', inline=False)
-    embed.add_field(name='.subtract [num] [num] [num] etc..', value = '(Only works with 2 numbers right now)Subtracts numbers', inline=False)
-
-    embed.add_field(name='.ttt', value = 'TicTacToe!', inline=False)
-
-    embed.add_field(name='.load [extension]', value = 'Loads extension', inline=False)
-    embed.add_field(name='.unload [extension]', value = 'Unloads extension', inline=False)
-
-    embed.add_field(name='.play [URL]', value = 'Plays song at URL', inline=False)
-    embed.add_field(name='.queue [URL]', value = 'Adds song at URL to queue', inline=False)
-    embed.add_field(name='.pause', value = 'Pauses current song playing', inline=False)
-    embed.add_field(name='.stop', value = 'Stops current song playing', inline=False)
-    embed.add_field(name='.resume', value = 'Resumes playing paused song', inline=False)
-
-    await client.send_message(author, embed=embed)
 
 @client.command()
 # *args lets you pass in an infinite amount of arguments into the command, returns tuple of all arguments passed into command
