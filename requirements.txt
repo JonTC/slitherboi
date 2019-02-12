@@ -2,5 +2,5 @@ discord
 discord[voice]
 youtube-dl
 asyncio
-re
+regex
 math
