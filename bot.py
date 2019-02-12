@@ -25,7 +25,7 @@ weebsongs = [
 ]
 gamestatus = ['with Myself', 'with Your Heart', 'You Like a Fiddle', 'HuniePop', 'OSU!', 'the Game of Life', 'with My Cat']
 extensions = ['Music', 'Calculator', 'Fun', 'TTT']
-#this just changes the little 'playing with' thing underneath the bot name every 50 seconds
+#this just changes the little 'playing with' thing underneath the bot name every so often 
 async def change_status():
     await client.wait_until_ready()
     msgs = cycle(gamestatus)
