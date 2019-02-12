@@ -3,3 +3,5 @@ discord[voice]
 youtube-dl
 asyncio
 regex
+math.e
+math.log1p
