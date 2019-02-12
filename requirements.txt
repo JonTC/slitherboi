@@ -3,4 +3,3 @@ discord[voice]
 youtube-dl
 asyncio
 regex
-Math
