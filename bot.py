@@ -23,7 +23,7 @@ weebsongs = [
 'https://www.youtube.com/watch?v=R7uF09yI4YA',
 'https://www.youtube.com/watch?v=-hA4na_3jT0',
 ]
-gamestatus = ['with Myself', 'with Your Heart', 'You Like a Fiddle', 'HuniePop', 'OSU!', 'the Game of Life', 'My Cat']
+gamestatus = ['with Myself', 'with Your Heart', 'You Like a Fiddle', 'HuniePop', 'OSU!', 'the Game of Life', 'with My Cat']
 extensions = ['Music', 'Calculator', 'Fun', 'TTT']
 #this just changes the little 'playing with' thing underneath the bot name every 50 seconds
 async def change_status():
