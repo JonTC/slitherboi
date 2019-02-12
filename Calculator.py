@@ -2,7 +2,6 @@ import discord
 import asyncio
 import math
 
-from math import exp, expm1
 from math import e
 from discord.ext import commands
 
