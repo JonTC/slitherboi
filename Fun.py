@@ -33,12 +33,53 @@ class Fun:
             await self.client.send_message(message.channel, 'Yeah Rishi, shut the fuck up')
         if(message.content.lower() == 'bot give me a weeb song'):
             await self.client.send_message(message.channel, weebsongs[randint(0,4)])
+    @commands.command()
+    async def ping(self):
+        #client.say can only be used in a command, while client.send_message can be used in commands and events
+        #not passed in a channel, sends message to channel that it was called in
+        await self.client.say('Pong!')
 
+    @commands.command()
+    # *args lets you pass in an infinite amount of arguments into the command, returns tuple of all arguments passed into command
+    async def echo(self,*args):
+        output = ''
+        for word in args:
+            output += word
+            output += ' '
+        await self.client.say(output)
 
     @commands.command(pass_context=True)
-    async def annoy(self,ctx, member : discord.Member):
+    async def clear(self, ctx, amount=5):
+        channel = ctx.message.channel
+        await self.client.purge_from(channel, limit=int(amount) + 1)
+        await self.client.say('{} messages deleted'.format(amount))
+
+    @commands.command()
+    async def annoy(self,*, member : discord.Member):
+        """spams the user mention 5 times once every 2 seconds"""
         for n in range(5):
             await self.client.say("wake the fuck up <@{}>".format(member.id))
-            asyncio.sleep(2)
+            asyncio.sleep(10)
+
+    @commands.command()
+    async def ccipher(self, shift, *, message):
+        """caeser ciphering a message"""
+        lMessage = str(message).lower()
+        result = ''
+        temp = ''
+        for i in range(len(lMessage)):
+            if(lMessage[i] == ' '):
+                result += ' '
+            elif(ord(lMessage[i]) < ord('z') and ord(lMessage[i]) >= ord('a')):
+                temp = chr(ord(lMessage[i]) + int(shift))
+                if ord(temp) > 122:
+                    temp = chr(ord(temp) - 26)
+                elif ord(temp) < 97:
+                    temp = chr(ord(temp) + 26)
+                result += temp
+            else:
+                result += chr((ord(lMessage[i])-26)+int(shift))
+        await self.client.say(shift + ' shift(s). Ciphered result is: ' + result)
+
 def setup(client):
     client.add_cog(Fun(client))

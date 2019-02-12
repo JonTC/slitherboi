@@ -23,11 +23,8 @@ weebsongs = [
 'https://www.youtube.com/watch?v=R7uF09yI4YA',
 'https://www.youtube.com/watch?v=-hA4na_3jT0',
 ]
-
 gamestatus = ['with Myself', 'with Your Heart', 'You Like a Fiddle', 'HuniePop', 'OSU!', 'the Game of Life', 'My Cat']
-extensions = ['Music', 'Calculator', 'Fun', 'TTT','Help']
-
-
+extensions = ['Music', 'Calculator', 'Fun', 'TTT']
 #this just changes the little 'playing with' thing underneath the bot name every 50 seconds
 async def change_status():
     await client.wait_until_ready()
@@ -38,12 +35,9 @@ async def change_status():
         await client.change_presence(game=discord.Game(name=current_gamestatus))
         #asyncio just pauses this function while allowing all other code to run, time.sleep pauses entire bot
         await asyncio.sleep(3600)
-
 @client.event
 async def on_ready():
     print('Slithering on')
-
-
 #logs person's id and message
 @client.event
 async def on_message(message):
@@ -51,53 +45,34 @@ async def on_message(message):
     content = message.content
     print('{}: {}'.format(author, content))
     await client.process_commands(message)
-#ping pong
-@client.command()
-async def ping():
-    #client.say can only be used in a command, while client.send_message can be used in commands and events
-    #not passed in a channel, sends message to channel that it was called in
-    await client.say('Pong!')
-
-@client.command()
-# *args lets you pass in an infinite amount of arguments into the command, returns tuple of all arguments passed into command
-async def echo(*args):
-    output = ''
-    for word in args:
-        output += word
-        output += ' '
-    await client.say(output)
-
-#clears text with amount specified
 @client.command(pass_context=True)
-async def clear(ctx, amount=5):
-    channel = ctx.message.channel
-    await client.purge_from(channel, limit=int(amount) + 1)
-    await client.say('{} messages deleted'.format(amount))
+async def help(ctx):
+    author = ctx.message.author
+    embed = discord.Embed(
+    color = discord.Color.green()
+    )
+    embed.set_author(name='Help')
+    embed.add_field(name='.ping', value = 'Pong!', inline=False)
+    embed.add_field(name='.echo [words]', value = 'Echoes the words that you input', inline=False)
+    embed.add_field(name='.clear [amount]', value = 'Clears the specified amount of messages', inline=False)
+    embed.add_field(name='.timer [seconds]', value = 'Gives a message once [seconds] have passed', inline=False)
 
-#turns bot off
-@client.command()
-async def logout():
-    await client.say('Slithering away!')
-    await client.logout()
+    embed.add_field(name='.multiply[num] [num] [num] etc..', value = 'Multiplies multiple numbers', inline=False)
+    embed.add_field(name='.add [num] [num] [num] etc..', value = 'Adds multiple numbers', inline=False)
+    embed.add_field(name='.subtract [num] [num] [num] etc..', value = 'Subtracts numbers', inline=False)
+    embed.add_field(name='.mod [num] [num] [num] etc..', value = 'Take the modulo of numbers', inline=False)
+    embed.add_field(name='.ln [num]', value = 'Take the natural log of a number', inline=False)
 
-#loads cogs
-@client.command()
-async def load(extension):
-    try:
-        client.load_extension(extension)
-        print('loaded {}'.format(extension))
-    except Exception as error:
-        print('{} cannot be loaded. [{}]'.format(extension, error))
+    embed.add_field(name='.ttt', value = 'TicTacToe!', inline=False)
+    embed.add_field(name='.annoy[user]', value = "You're an ass if you use this but I made it so idk", inline=False)
+    embed.add_field(name='.ccipher[# to shift][message to shift]', value = 'Caeser cipher', inline=False)
 
-#unloads cogs
-@client.command()
-async def unload(extension):
-    try:
-        client.unload_extension(extension)
-        print('unloaded {}'.format(extension))
-    except Exception as error:
-        print('{} cannot be unloaded. [{}]'.format(extension, error))
+    embed.add_field(name='.play [URL]', value = 'Plays song at URL', inline=False)
+    embed.add_field(name='.pause', value = 'Pauses current song playing', inline=False)
+    embed.add_field(name='.stop', value = 'Stops current song playing', inline=False)
+    embed.add_field(name='.resume', value = 'Resumes playing paused song', inline=False)
 
+    await client.send_message(author, embed=embed)
 
 if __name__ == '__main__':
     for extension in extensions:
@@ -107,6 +82,7 @@ if __name__ == '__main__':
             print('{} cannot be loaded. [{}]'.format(extension, error))
     client.loop.create_task(change_status())
     client.run(TOKEN)
+
 
 #these are embed stuffs, not sure what to use it for so its here but not active
 #@client.command()
