@@ -66,9 +66,12 @@ class Calculator:
         total = 0.0
         if(str(arg) == 'e'):
             total = math.log1p(e - 1)
+            await self.client.say('The natural log of {} is: {}'.format(arg, total))
+        elif(int(arg) < 0):
+            await self.client.say('Non-real number')
         else:
             total = math.log1p(float(arg) -1)
-        await self.client.say('The natural log of {} is: {}'.format(arg, total))
+            await self.client.say('The natural log of {} is: {}'.format(arg, total))
 
     #@commands.command()
     #async def deriv(self, arg):

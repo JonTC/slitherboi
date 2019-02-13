@@ -58,10 +58,11 @@ async def help(ctx):
     embed.add_field(name='.clear [amount]', value = 'Clears the specified amount of messages', inline=False)
     embed.add_field(name='.timer [seconds]', value = 'Gives a message once [seconds] have passed', inline=False)
 
-    embed.add_field(name='.multiply[num] [num] [num] etc..', value = 'Multiplies multiple numbers', inline=False)
+    embed.add_field(name='.mult[num] [num] [num] etc..', value = 'Multiplies multiple numbers', inline=False)
     embed.add_field(name='.add [num] [num] [num] etc..', value = 'Adds multiple numbers', inline=False)
-    embed.add_field(name='.subtract [num] [num] [num] etc..', value = 'Subtracts numbers', inline=False)
-    embed.add_field(name='.mod [num] [num] [num] etc..', value = 'Take the modulo of numbers', inline=False)
+    embed.add_field(name='.subt [num] [num] [num] etc..', value = 'Subtracts numbers', inline=False)
+    embed.add_field(name='.modo [num] [num] [num] etc..', value = 'Take the modulo of numbers', inline=False)
+    embed.add_field(name='.divi [num] [num] [num] etc..', value = 'Divide multiple numbers', inline=False)
     embed.add_field(name='.ln [num]', value = 'Take the natural log of a number', inline=False)
 
     embed.add_field(name='.ttt', value = 'TicTacToe!', inline=False)
