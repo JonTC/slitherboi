@@ -2,19 +2,14 @@ import discord
 import asyncio
 import math
 
+
+from math import exp, expm1
 from math import e
 from discord.ext import commands
 
 class Calculator:
     def __init__(self, client):
         self.client = client
-
-    @commands.command()
-    async def multiply(self, *args):
-        product = 1.0
-        for x in args:
-            product = product * float(x)
-        await self.client.say('The product is: {}'.format(product))
 
     @commands.command()
     async def add(self, *args):
@@ -25,7 +20,7 @@ class Calculator:
 
     #only works with 2 numbers rn
     @commands.command()
-    async def subtract(self,*args):
+    async def subt(self,*args):
         total = 0.0
         for i in range(len(args)):
             if(i == 0):
@@ -35,7 +30,22 @@ class Calculator:
         await self.client.say('The difference is: ' + str(total))
 
     @commands.command()
-    async def mod(self, *args):
+    async def mult(self, *args):
+        product = 1.0
+        for x in args:
+            product = product * float(x)
+        await self.client.say('The product is: {}'.format(product))
+    @commands.command()
+    async def divi(self, *args):
+        for i in range(len(args)):
+            if(i == 0):
+                quotient = float(args[i])
+            else:
+                quotient /= float(args[i])
+        await self.client.say('The quotient is: {}'.format(quotient))
+
+    @commands.command()
+    async def modo(self, *args):
         total = 0.0
         for i in range(len(args)):
             if(i == 0):
@@ -43,7 +53,14 @@ class Calculator:
             else:
                 total %= float(args[i])
         await self.client.say('The total is: ' + str(total))
-
+    """
+    @commands.command()
+    await def exp(self, base, exp, *therest):
+        product = float(base)**float(self)
+        await self.client.say('{} raised to the power of {} is: {}'.format(base, exp, product))
+        if(therest):
+            await self.client.say('{} is not valid'.format(therest))
+    """
     @commands.command()
     async def ln(self, arg):
         total = 0.0

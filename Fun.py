@@ -1,6 +1,7 @@
 import discord
 import re
 import asyncio
+import string
 
 from discord.ext import commands
 from bot import weebsongs
@@ -20,7 +21,7 @@ class Fun:
             await self.client.send_message(message.channel, 'fuck off')
         if message.content.lower() == ('hit or miss'):
             await self.client.add_reaction(message, '👎')
-            await self.client.send_message(message.channel, 'Sometimes, they do miss, human')
+            await self.client.send_message(message.channel, 'Sometimes, they do miss')
         #br[ia][aei]n|eug(ene)?|jon|meats|demitri|jawad|rishi|python)
         if re.match(r'(?i)(br[ia][aei]n|eug(ene)?|jon|meats|demitri|jawad|rishi|python) is g[ae][iy]', message.content):
             await self.client.add_reaction(message, '🍆')
@@ -48,22 +49,34 @@ class Fun:
             output += ' '
         await self.client.say(output)
 
+
     @commands.command(pass_context=True)
-    async def clear(self, ctx, amount=5):
+    async def clear(self,ctx,amount=5):
         channel = ctx.message.channel
-        await self.client.purge_from(channel, limit=int(amount) + 1)
-        await self.client.say('{} messages deleted'.format(amount))
+        if(amount<0):
+            await self.client.say("Can't bring messages back, srry")
+        else:
+            await self.client.purge_from(channel, limit=int(amount+1))
+            await asyncio.sleep(1)
+            await self.client.say('{} message(s) deleted'.format(amount))
+
 
     @commands.command()
     async def annoy(self,*, member : discord.Member):
-        """spams the user mention 5 times once every 2 seconds"""
         for n in range(5):
             await self.client.say("wake the fuck up <@{}>".format(member.id))
-            asyncio.sleep(10)
+            await asyncio.sleep(1)
 
     @commands.command()
+    async def ccipher(self,*args):
+        message = ' '.join(args[:-1])
+        shift = int(args[-1])
+        alpha = string.ascii_lowercase
+        await self.client.say(''.join(alpha[(alpha.index(letter)+int(shift))%26] if letter in alpha else letter for letter in message.lower()))
+
+    """
+    @commands.command()
     async def ccipher(self, shift, *, message):
-        """caeser ciphering a message"""
         lMessage = str(message).lower()
         result = ''
         temp = ''
@@ -80,6 +93,6 @@ class Fun:
             else:
                 result += chr((ord(lMessage[i])-26)+int(shift))
         await self.client.say(shift + ' shift(s). Ciphered result is: ' + result)
-
+    """
 def setup(client):
     client.add_cog(Fun(client))
