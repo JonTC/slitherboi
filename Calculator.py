@@ -67,6 +67,8 @@ class Calculator:
         if(str(arg) == 'e'):
             total = math.log1p(e - 1)
             await self.client.say('The natural log of {} is: {}'.format(arg, total))
+        elif(int(arg) == 0):
+            await self.client.say('Undefined')
         elif(int(arg) < 0):
             await self.client.say('Non-real number')
         else:
