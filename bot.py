@@ -32,7 +32,7 @@ weebsongs = [
 'https://www.youtube.com/watch?v=OsLY7DXWsF4: Crossing Field'
 ]
 gamestatus = ['with Myself', 'with Your Heart', 'You Like a Fiddle', 'HuniePop', 'OSU!', 'the Game of Life', 'My Cat', 'all by Myself','Tota - Africa, for hours on end',
-'Overwatch', 'CS:GO', 'Team Fortress 2','']
+'Overwatch', 'CS:GO', 'Team Fortress 2']
 
 extensions = ['Music', 'Calculator', 'Fun', 'TTT']
 #this just changes the little 'playing with' thing underneath the bot name every 50 seconds
