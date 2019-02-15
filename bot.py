@@ -29,6 +29,7 @@ weebsongs = [
 'https://www.youtube.com/watch?v=DjS58kpTcuw: Hitorigoto',
 'https://www.youtube.com/watch?v=ObQd7Co7Q_I: Fiction',
 'https://www.youtube.com/watch?v=DpCfhRVqJWU: 99.9'
+'https://www.youtube.com/watch?v=OsLY7DXWsF4: Crossing Field'
 ]
 gamestatus = ['with Myself', 'with Your Heart', 'You Like a Fiddle', 'HuniePop', 'OSU!', 'the Game of Life', 'My Cat', 'all by Myself','Tota - Africa, for hours on end',
 'Overwatch', 'CS:GO', 'Team Fortress 2','']
