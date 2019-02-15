@@ -16,15 +16,23 @@ client.remove_command('help')
 players = {}
 queues = {}
 weebsongs = [
-'https://www.youtube.com/watch?v=-Q--ZqWOZrw',
-'https://www.youtube.com/watch?v=0YF8vecQWYs',
-'https://www.youtube.com/watch?v=3dLqUADUNZ0',
-'https://www.youtube.com/watch?v=CaksNlNniis',
-'https://www.youtube.com/watch?v=5_iuNaULT5k',
-'https://www.youtube.com/watch?v=R7uF09yI4YA',
-'https://www.youtube.com/watch?v=-hA4na_3jT0',
+'https://www.youtube.com/watch?v=-Q--ZqWOZrw: Blend S OP',
+'https://www.youtube.com/watch?v=0YF8vecQWYs: Domestic na Kanojo OP',
+'https://www.youtube.com/watch?v=3dLqUADUNZ0: Attack on Titan OP',
+'https://www.youtube.com/watch?v=CaksNlNniis: No Game No Life OP',
+'https://www.youtube.com/watch?v=5_iuNaULT5k: Hikaru Nara',
+'https://www.youtube.com/watch?v=-hA4na_3jT0: Angel Beats OP',
+'https://www.youtube.com/watch?v=PkVx2XYalzQ: Kekkai Sensen ED',
+'https://www.youtube.com/watch?v=armte0mUnDw: BunnyGirl OP',
+'https://www.youtube.com/watch?v=_GB7rZfjrxw: Peace Sign',
+'https://www.youtube.com/watch?v=F5OJPUXJvHk: 99',
+'https://www.youtube.com/watch?v=DjS58kpTcuw: Hitorigoto',
+'https://www.youtube.com/watch?v=ObQd7Co7Q_I: Fiction',
+'https://www.youtube.com/watch?v=DpCfhRVqJWU: 99.9'
 ]
-gamestatus = ['with Myself', 'with Your Heart', 'You Like a Fiddle', 'HuniePop', 'OSU!', 'the Game of Life', 'My Cat']
+gamestatus = ['with Myself', 'with Your Heart', 'You Like a Fiddle', 'HuniePop', 'OSU!', 'the Game of Life', 'My Cat', 'all by Myself','Tota - Africa, for hours on end',
+'Overwatch', 'CS:GO', 'Team Fortress 2','']
+
 extensions = ['Music', 'Calculator', 'Fun', 'TTT']
 #this just changes the little 'playing with' thing underneath the bot name every 50 seconds
 async def change_status():
@@ -35,7 +43,7 @@ async def change_status():
         current_gamestatus = next(msgs)
         await client.change_presence(game=discord.Game(name=current_gamestatus))
         #asyncio just pauses this function while allowing all other code to run, time.sleep pauses entire bot
-        await asyncio.sleep(3600)
+        await asyncio.sleep(600)
 @client.event
 async def on_ready():
     print('Slithering on')
@@ -52,7 +60,7 @@ async def help(ctx):
     embed = discord.Embed(
     color = discord.Color.green()
     )
-    embed.set_author(name='Help')
+    embed.set_footer(text='Help')
     embed.add_field(name='.ping', value = 'Pong!', inline=False)
     embed.add_field(name='.echo [words]', value = 'Echoes the words that you input', inline=False)
     embed.add_field(name='.clear [amount]', value = 'Clears the specified amount of messages', inline=False)
@@ -74,7 +82,13 @@ async def help(ctx):
     embed.add_field(name='.stop', value = 'Stops current song playing', inline=False)
     embed.add_field(name='.resume', value = 'Resumes playing paused song', inline=False)
 
+    embed.add_field(name='.weeb', value = 'Gives a random anime song from a list.', inline=False)
+
     await client.send_message(author, embed=embed)
+
+@client.command()
+async def abort():
+    await client.logout()
 
 if __name__ == '__main__':
     for extension in extensions:
@@ -84,6 +98,8 @@ if __name__ == '__main__':
             print('{} cannot be loaded. [{}]'.format(extension, error))
     client.loop.create_task(change_status())
     client.run(TOKEN)
+
+
 
 
 #these are embed stuffs, not sure what to use it for so its here but not active
