@@ -31,11 +31,12 @@ weebsongs = [
 'https://www.youtube.com/watch?v=DpCfhRVqJWU: 99.9',
 'https://www.youtube.com/watch?v=OsLY7DXWsF4: Crossing Field'
 ]
-gamestatus = ['with Myself', 'with Your Heart', 'You Like a Fiddle', 'HuniePop', 'OSU!', 'the Game of Life', 'My Cat', 'all by Myself','Tota - Africa, for hours on end',
+gamestatus = ['with Myself', 'with Your Heart', 'You Like a Fiddle', 'HuniePop', 'OSU!', 'the Game of Life', 'with My Cat', 'all by Myself','Tota - Africa, for hours on end',
 'Overwatch', 'CS:GO', 'Team Fortress 2']
 
 extensions = ['Music', 'Calculator', 'Fun', 'TTT']
 #this just changes the little 'playing with' thing underneath the bot name every 50 seconds
+
 async def change_status():
     await client.wait_until_ready()
     msgs = cycle(gamestatus)
@@ -55,6 +56,11 @@ async def on_message(message):
     content = message.content
     print('{}: {}'.format(author, content))
     await client.process_commands(message)
+    #rishi - July 26
+    #Peter - September 5
+    #Eugene - September 2
+    #Meats - March 7
+    #Brian - March 7
 @client.command(pass_context=True)
 async def help(ctx):
     author = ctx.message.author

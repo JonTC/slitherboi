@@ -74,6 +74,21 @@ class Calculator:
         else:
             total = math.log1p(float(arg) -1)
             await self.client.say('The natural log of {} is: {}'.format(arg, total))
+    """
+    @commands.command()
+    async def fibb(self,arg):
+        terms = int(arg)
+        first = 0
+        second = 1
+        sequence = []
+        temp = 0
+        for in in range(terms):
+            sequence += first
+            sequence += second
+            sequence += first + second
+            temp = second
+            first = second
+    """
 
     #@commands.command()
     #async def deriv(self, arg):

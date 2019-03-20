@@ -2,6 +2,7 @@ import discord
 import re
 import asyncio
 import string
+import datetime
 
 from discord.ext import commands
 from bot import weebsongs
@@ -14,20 +15,60 @@ class Fun:
         self.client = client
 
     async def on_message(self, message):
-        if message.content.lower() == 'hello pythonboi':
+        currentDT = datetime.datetime.now()
+        author = message.author
+        content = message.content
+
+        if content.lower() == 'hello pythonboi':
             await self.client.add_reaction(message, '🙂')
             await self.client.send_message(message.channel, 'fuck off')
-        if message.content.lower() == 'hit or miss':
+        if content.lower() == 'hit or miss':
             await self.client.add_reaction(message, '👎')
             await self.client.send_message(message.channel, 'Sometimes, they do miss')
         #br[ia][aei]n|eug(ene)?|jon|meats|demitri|jawad|rishi|python)
         if re.match(r'(?i)(br[ia][aei]n|eug(ene)?|jon|meats|demitri|jawad|rishi|python) is g[ae][iy]', message.content):
             await self.client.add_reaction(message, '🍆')
             await self.client.send_message(message.channel, '😉')
-        if (message.content.lower() == ('rishi shut up')):
+        if content.lower() == ('rishi shut up'):
             await self.client.send_message(message.channel, 'Yeah Rishi, shut the fuck up')
-        if(message.content.lower() == 'give me a weeb song'):
+        if content.lower() == 'give me a weeb song':
             await self.client.send_message(message.channel, weebsongs[randint(0,len(weebsongs))])
+        if content.lower() == 'dance for me bitch':
+            await self.client.send_message(message.channel, '<.<')
+            await asyncio.sleep(2)
+
+            await self.client.send_message(message.channel, '^.^')
+            await asyncio.sleep(2)
+
+            await self.client.send_message(message.channel, '>.>')
+            await asyncio.sleep(2)
+
+            await self.client.send_message(message.channel, '^.^')
+        #Jon
+        if(author.id == "193444178514935808" and currentDT.month == 10 and currentDT.day == 5):
+            if(currentDT.hour > 16 and currentDT.hour < 20):
+                await self.client.add_reaction(message, '🎂')
+            if(currentDT.hour == 16 and currentDT.second == 1):
+                await self.client.send_message(message.channel,'Happy Birthday, Jon!')
+        #Meats and Brian
+        if((author.id == "249373239619485696" or author.id == "364082568787656708") and currentDT.month == 3 and currentDT.day == 7):
+            if(currentDT.hour > 16 and currentDT.hour < 20):
+                await self.client.add_reaction(message, '🎂')
+            if(currentDT.hour == 16 and currentDT.second == 1):
+                await self.client.send_message(message.channel,'Happy Birthday, Meats and Brian!')
+        #Rishi
+        if(author.id == "176186873926909953" and currentDT.month == 7 and currentDT.day == 26):
+            if(currentDT.hour > 16 and currentDT.hour < 20):
+                await self.client.add_reaction(message, '🎂')
+            if(currentDT.hour == 16 and currentDT.second == 1):
+                await self.client.send_message(message.channel,'Happy Birthday, Rishi!')
+        #Eugene
+        if(author.id == "424414054740787200" and currentDT.month == 9 and currentDT.day == 12):
+            if(currentDT.hour > 16 and currentDT.hour < 20):
+                await self.client.add_reaction(message, '🎂')
+            if(currentDT.hour == 16 and currentDT.second == 1):
+                await self.client.send_message(message.channel,'Happy Birthday, Eug!')
+
     @commands.command()
     async def ping(self):
         #client.say can only be used in a command, while client.send_message can be used in commands and events
@@ -63,6 +104,13 @@ class Fun:
         for n in range(5):
             await self.client.say("wake the fuck up <@{}>".format(member.id))
             await asyncio.sleep(1)
+
+    @commands.command()
+    async def coinflip(self):
+        if(randint(0,1) == 0):
+            await self.client.say('Heads')
+        else:
+            await self.client.say('Tails')
 
     @commands.command()
     async def ccipher(self,*args):
