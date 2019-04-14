@@ -9,6 +9,7 @@ from bot import weebsongs
 from random import randint
 from itertools import cycle
 
+respect = 0
 
 class Fun:
     def __init__(self, client):
@@ -68,6 +69,11 @@ class Fun:
                 await self.client.add_reaction(message, '🎂')
             if(currentDT.hour == 16 and currentDT.second == 1):
                 await self.client.send_message(message.channel,'Happy Birthday, Eug!')
+        if content.lower() == 'f':
+            global respect
+            respect = respect + 1
+            if(respect % 10 == 0):
+                await self.client.send_message(message.channel, 'Respect has been paid {} times'.format(respect))
 
     @commands.command()
     async def ping(self):
