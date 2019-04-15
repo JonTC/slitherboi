@@ -10,6 +10,7 @@ from random import randint
 from itertools import cycle
 
 respect = 0
+ls = 0
 
 class Fun:
     def __init__(self, client):
@@ -71,9 +72,14 @@ class Fun:
                 await self.client.send_message(message.channel,'Happy Birthday, Eug!')
         if content.lower() == 'f':
             global respect
-            respect = respect + 1
+            respect += 1
             if(respect % 10 == 0):
                 await self.client.send_message(message.channel, 'Respect has been paid {} times'.format(respect))
+        if content.lower() == 'l':
+            global ls
+            ls += 1
+            if(ls % 10 == 0):
+                await self.client.send_message(message.channel, 'The L has been given {} times'.format(ls))
 
     @commands.command()
     async def ping(self):
